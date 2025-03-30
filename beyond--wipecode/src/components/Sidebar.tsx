@@ -13,38 +13,47 @@ import {
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import { useNavigate, useParams } from 'react-router-dom';
 import chapters from '../data/chapters.json';
+import { useSidebar } from '../context/SidebarContext';
 
 const drawerWidth = 210;
 
-const Sidebar = () => {
+interface SidebarProps {
+  variant: 'permanent' | 'temporary';
+}
+
+const Sidebar = ({ variant }: SidebarProps) => {
   const navigate = useNavigate();
   const { chapterId } = useParams();
-
+  const { isSidebarOpen, toggleSidebar } = useSidebar();
+  
   // Add error handling for chapters data
-  if (!chapters || !chapters.chapters) {
+  if (!chapters?.chapters) {
+    console.error('Chapters data not found');
     return null;
   }
 
   return (
     <Drawer
-      variant="permanent"
+      variant={variant}
+      open={variant === 'temporary' ? isSidebarOpen : true}
+      onClose={variant === 'temporary' ? toggleSidebar : undefined}
       sx={{
         width: drawerWidth,
         flexShrink: 0,
-        [`& .MuiDrawer-paper`]: { 
-          width: drawerWidth, 
+        '& .MuiDrawer-paper': {
+          width: drawerWidth,
           boxSizing: 'border-box',
-          background: 'linear-gradient(90deg,rgb(6, 12, 18) 0%,rgb(41, 45, 179) 50%,rgb(41, 46, 198) 70%,rgb(36, 63, 185) 100%)',
+          background: 'linear-gradient(190deg,rgb(14, 24, 35) 0%,rgb(16, 18, 83) 50%,rgb(67, 55, 225) 100%)',
           color: 'white',
           borderRight: '1px solid',
           borderColor: 'rgba(255, 255, 255, 0.12)'
         },
       }}
     >
-      <Toolbar sx={{ minHeight: { xs: 64, md: 50 } }} />
+      <Toolbar sx={{ minHeight: { xs: 48, md: 56 } }} />
       <Box sx={{ height: 8 }} />
       
-      <Box sx={{ overflow: 'auto',textAlign:'center'}}>
+      <Box sx={{ overflow: 'auto' }}>
         <Typography 
           variant="h6" 
           sx={{ 
@@ -53,6 +62,7 @@ const Sidebar = () => {
             color: 'white',
             letterSpacing: '.05rem',
             fontWeight: 500,
+            textAlign: 'center'
           }}
         >
           Lessons
@@ -62,7 +72,12 @@ const Sidebar = () => {
           {chapters.chapters.map((chapter) => (
             <ListItem key={chapter.id} disablePadding>
               <ListItemButton 
-                onClick={() => navigate(`/chapter/${chapter.id}`)}
+                onClick={() => {
+                  navigate(`/chapter/${chapter.id}`);
+                  if (variant === 'temporary') {
+                    toggleSidebar();
+                  }
+                }}
                 selected={Number(chapterId) === chapter.id}
                 sx={{
                   py: 1.5,
@@ -92,12 +107,10 @@ const Sidebar = () => {
                 </ListItemIcon>
                 <ListItemText 
                   primary={`Lesson ${chapter.id}`}
-                  
                   primaryTypographyProps={{
                     fontSize: '0.875rem',
                     fontWeight: 500,
                     color: 'white',
-                    
                     mb: 0.5,
                   }}
                   secondaryTypographyProps={{
