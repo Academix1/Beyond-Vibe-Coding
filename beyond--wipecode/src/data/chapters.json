@@ -1,0 +1,100 @@
+  {
+    "chapters": [
+      {
+        "id": 1,
+        "title": "The Hidden Dangers of Unguided AI Development",
+        "slug": "hidden-dangers-ai-development",
+        "content": {
+          "introduction": "In recent years, we've witnessed the emergence of what some call 'vibe coding' – using AI tools like Cursor, GitHub Copilot, or ChatGPT to write code with minimal programming knowledge.",
+          "sections": [
+            {
+              "title": "The Rise of 'Vibe Coding' and Its Pitfalls",
+              "content": [
+                "As one developer noted, 'This wave of vibe coding isn't inherently bad. It can spark interest in programming for people who wouldn't otherwise try it. It's like how HTML and CSS widgets fascinated many of us years ago and led us into web development.'",
+                "However, there's a critical distinction between using AI to assist your coding and relying on it to build production software without understanding the underlying principles.",
+                "When your project becomes complex, AI models go from writing good code to merely working code to eventually bad code that's neither functional nor maintainable."
+              ]
+            },
+            {
+              "title": "The 3 AM Nightmare",
+              "content": [
+                "It's 3 AM. Alex stares at the screen, eyes burning from exhaustion. The project deadline is in six hours, but something has gone terribly wrong.",
+                "'I was just trying to use Cursor to help with a simple database query,' Alex whispers to the empty room.",
+                "The reality? AI coding tools are powerful, but without proper guardrails, they can become digital wrecking balls in your codebase."
+              ]
+            },
+            {
+              "title": "The Unseen Crisis in AI-Assisted Development",
+              "content": [
+                "If you picked up this book, you might be:",
+                "• A developer excited about AI coding assistants but wary of their risks",
+                "• Someone who's already experienced the chaos of uncontrolled AI changes",
+                "• A team lead trying to establish safe AI practices",
+                "• A professional looking to harness AI's power without its pitfalls"
+              ]
+            },
+            {
+              "title": "When AI Goes Rogue: The Real Costs",
+              "content": [
+                "The allure of AI coding tools is undeniable:",
+                "• Generate entire functions in seconds",
+                "• Fix complex bugs with simple prompts",
+                "• Refactor code automatically",
+                "• Implement features at unprecedented speed",
+                "But without proper controls, these benefits quickly become liabilities."
+              ]
+            }
+          ],
+          "quotes": [
+            {
+              "text": "AI is an amazing copilot, but a dangerous pilot.",
+              "author": "Jamie, Backend Developer"
+            },
+            {
+              "text": "You cannot be a 'vibe' production developer. The only viable approach is to build 'vibe personal software' while you're learning the fundamentals.",
+              "author": "Industry Expert"
+            }
+          ],
+          "keyPoints": [
+            "Establish clear boundaries for AI tools",
+            "Create development checkpoints",
+            "Design effective prompts",
+            "Implement validation systems",
+            "Develop proper collaboration workflows"
+          ]
+        },
+        "tools": {
+          "primary": [
+            "Python as programming language",
+            "Cursor as AI-powered IDE",
+            "Claude 3.7 Sonnet as LLM"
+          ],
+          "alternatives": [
+            "Any programming language (JavaScript, Java, C#, Go, Ruby)",
+            "Any AI coding assistant (GitHub Copilot, Amazon CodeWhisperer)",
+            "Any advanced LLM (GPT-4, Gemini)"
+          ]
+        },
+        "images": [
+          {
+            "url": "/chapter1/vibe-coding.jpg",
+            "alt": "Vibe Coding Concept",
+            "description": [
+              "Visual representation of AI-assisted coding",
+              "Illustrates the balance between automation and understanding",
+              "Highlights the importance of proper guardrails"
+            ]
+          },
+          {
+            "url": "/chapter1/3am-nightmare.jpg",
+            "alt": "3 AM Coding Nightmare",
+            "description": [
+              "Depicts the stress of late-night coding disasters",
+              "Shows the impact of uncontrolled AI changes",
+              "Emphasizes the need for proper safeguards"
+            ]
+          }
+        ]
+      }
+    ]
+  }
