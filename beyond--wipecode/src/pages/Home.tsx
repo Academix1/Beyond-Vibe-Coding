@@ -10,20 +10,19 @@ const Home = () => {
         position: 'relative',
 
         height: '90vh',
-        width: '100vw',
+        width: '95vw',
         overflowX: '-moz-hidden-unscrollable',
         overflowY: 'hidden',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'flex-start',
         transition:'blur 0.5s ease-in-out',
-        backgroundImage: theme => `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(/Acad.avif)`,
+        backgroundImage: theme => `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7))`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundAttachment: 'fixed',
+        mt:2,
         color: 'white',
-        marginLeft: '-8px',
-        paddingLeft: '8px',
       }}
     >
       <Container 
