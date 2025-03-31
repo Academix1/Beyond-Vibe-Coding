@@ -12,19 +12,21 @@ import MenuIcon from '@mui/icons-material/Menu';
 import CodeIcon from '@mui/icons-material/Code';
 import { useSidebar } from '../context/SidebarContext';
 
-const pages = ['Dashboard', 'Chapters', 'Resources', 'Settings'];
+const pages = ['Products', 'SelfLearning', 'LiveBootCamps'];
 
 const Navbar = () => {
   const { toggleSidebar } = useSidebar();
 
   return (
     <AppBar 
-      position="fixed" 
+      position="absolute" 
       elevation={0}
       sx={{ 
-        background: 'linear-gradient(140deg,rgb(16, 24, 32) 0%,rgb(24, 26, 64) 50%,rgb(15, 52, 175) 100%)',
+        backgroundColor: 'white',
         zIndex: (theme) => theme.zIndex.drawer + 1,
         borderBottom: '1px solid',
+        alignItems: 'center',
+        justifyContent: 'center',
         borderColor: 'rgba(255, 255, 255, 0.12)'
       }}
     >
@@ -45,7 +47,7 @@ const Navbar = () => {
             sx={{ 
               display: { xs: 'flex', md: 'none' },
               mr: 1,
-              color: 'white'
+              color: 'black'
             }}
           >
             <MenuIcon fontSize="small" />
@@ -65,7 +67,7 @@ const Navbar = () => {
               display: { xs: 'none', md: 'flex' },
               fontWeight: 700,
               letterSpacing: '.1rem',
-              color: 'white',
+              color: 'rgb(5, 5, 6)',
               fontSize: '1rem',
               mr: 2
             }}
@@ -87,11 +89,11 @@ const Navbar = () => {
               sx={{
                 fontWeight: 700,
                 letterSpacing: '.1rem',
-                color: 'white',
-                fontSize: '0.9rem'
+                color: 'rgba(7, 7, 7, 0.87)',
+                fontSize: '0.75rem'
               }}
             >
-              VIBE-CODE
+              BEYOND-VIBE-CODE
             </Typography>
           </Box>
 
@@ -114,8 +116,8 @@ const Navbar = () => {
               <Button
                 key={page}
                 sx={{ 
-                  color: 'white',
-                  fontSize: { xs: '0.75rem', md: '0.85rem' },
+                  color: 'rgb(0, 0, 0)',
+                  fontSize: { xs: '0.75rem', md: '1.0rem' },
                   fontWeight: 500,
                   padding: { xs: '4px 8px', md: '4px 12px' },
                   minWidth: 'max-content',
@@ -131,6 +133,7 @@ const Navbar = () => {
               </Button>
             ))}
           </Box>
+
 
           {/* Mobile Navigation */}
           <Box sx={{ 
@@ -151,10 +154,10 @@ const Navbar = () => {
               <Button
                 key={page}
                 sx={{ 
-                  color: 'white',
-                  fontSize: { xs: '0.75rem', md: '0.85rem' },
+                  color: 'rgba(40, 115, 245, 0.87)',
+                  fontSize: { xs: '0.65rem', md: '0.85rem' },
                   fontWeight: 500,
-                  padding: { xs: '4px 8px', md: '4px 12px' },
+                  padding: { xs: '2px 4px', md: '4px 12px' },
                   minWidth: 'max-content',
                   whiteSpace: 'nowrap',
                   transition: 'all 0.2s ease-in-out',

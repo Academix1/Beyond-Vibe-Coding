@@ -26,14 +26,22 @@ const Lesson = () => {
   return (
     <Box 
       sx={{ 
+        position: 'relative',
         maxWidth: '1200px', 
+        backgroundColor: 'white',
         margin: '0 auto', 
+        padding: '10px',
+        pl: 5,
+        pr: 5,
+        mt:2,
+        borderRadius: '10px',
+        mr: 2,
         p: 2,
         ...scrollbarStyles
       }}
     >
-      <Typography variant="h4" gutterBottom>
-        Chapter {chapter.id}: {chapter.title}
+      <Typography variant="h4" gutterBottom sx={{fontSize: '1.5rem', fontWeight: 700, color: 'Black',mb: 5}}>
+        {chapter.title}
       </Typography>
 
       <Paper elevation={0} sx={{ p: 3, mb: 3, bgcolor: 'background.paper' }}>
@@ -45,7 +53,7 @@ const Lesson = () => {
       {/* Sections */}
       {chapter.content.sections.map((section, index) => (
         <Box key={index} sx={{ mb: 4 }}>
-          <Typography variant="h5" gutterBottom sx={{ color: 'primary.main' }}>
+          <Typography variant="h5" gutterBottom sx={{ color: 'Black' }}>
             {section.title}
           </Typography>
           {section.content.map((paragraph, pIndex) => (
@@ -98,9 +106,9 @@ const Lesson = () => {
         <Typography variant="h6" gutterBottom>
           Recommended Tools
         </Typography>
-        <Box sx={{ display: 'flex', gap: 4 }}>
+        <Box sx={{ display: 'block', gap: 4 }}>
           <Box flex={1}>
-            <Typography variant="subtitle1" gutterBottom color="primary">
+            <Typography variant="subtitle1" gutterBottom color="Black">
               Primary Tools
             </Typography>
             <List>
@@ -112,7 +120,7 @@ const Lesson = () => {
             </List>
           </Box>
           <Box flex={1}>
-            <Typography variant="subtitle1" gutterBottom color="primary">
+            <Typography variant="subtitle1" gutterBottom color="Black">
               Alternatives
             </Typography>
             <List>

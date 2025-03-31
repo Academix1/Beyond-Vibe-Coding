@@ -1,129 +1,145 @@
-import { 
-  Drawer, 
-  List, 
-  ListItem, 
-  ListItemIcon, 
-  ListItemText,
+import {
+  Drawer,
+  List,
   ListItemButton,
+  ListItemIcon,
+  ListItemText,
   Box,
-  Toolbar,
+  Divider,
   Typography,
-  Divider
+  useTheme,
 } from '@mui/material';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import { useNavigate, useParams } from 'react-router-dom';
 import chapters from '../data/chapters.json';
 import { useSidebar } from '../context/SidebarContext';
 
-const drawerWidth = 210;
-
 interface SidebarProps {
   variant: 'permanent' | 'temporary';
 }
 
 const Sidebar = ({ variant }: SidebarProps) => {
+  const theme = useTheme();
   const navigate = useNavigate();
   const { chapterId } = useParams();
   const { isSidebarOpen, toggleSidebar } = useSidebar();
-  
-  // Add error handling for chapters data
+
   if (!chapters?.chapters) {
     console.error('Chapters data not found');
     return null;
   }
 
+  const handleChapterClick = (chapterId: number) => {
+    navigate(`/chapter/${chapterId}`);
+    if (variant === 'temporary') {
+      toggleSidebar();
+    }
+  };
+
   return (
     <Drawer
       variant={variant}
       open={variant === 'temporary' ? isSidebarOpen : true}
-      onClose={variant === 'temporary' ? toggleSidebar : undefined}
+      onClose={toggleSidebar}
+      ModalProps={{
+        keepMounted: true, // Better performance on mobile
+        BackdropProps: {
+          sx: {
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+          },
+        },
+      }}
       sx={{
-        width: drawerWidth,
-        flexShrink: 0,
+        display: {
+          xs: variant === 'temporary' ? 'block' : 'none',
+          md: variant === 'permanent' ? 'block' : 'none',
+        },
         '& .MuiDrawer-paper': {
-          width: drawerWidth,
+          width: {
+            xs: variant === 'temporary' ? '280px' : '100%',
+            md: '100%',
+          },
           boxSizing: 'border-box',
-          background: 'linear-gradient(190deg,rgb(14, 24, 35) 0%,rgb(16, 18, 83) 50%,rgb(67, 55, 225) 100%)',
-          color: 'white',
-          borderRight: '1px solid',
-          borderColor: 'rgba(255, 255, 255, 0.12)'
+          backgroundColor: 'white',
+          borderRight: `1px solid ${theme.palette.divider}`,
+          ...(variant === 'temporary'
+            ? {
+                position: 'fixed',
+                top: '64px',
+                height: 'calc(100vh - 64px)',
+                zIndex: theme.zIndex.drawer - 1,
+              }
+            : {
+                position: 'relative',
+                height: 'calc(100vh - 64px)',
+                borderRight: 'none',
+              }),
+          overflowX: 'hidden',
+          scrollbarWidth: 'none',
+          '&::-webkit-scrollbar': { display: 'none' },
+          transition: theme.transitions.create('transform', {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.enteringScreen,
+          }),
         },
       }}
     >
-      <Toolbar sx={{ minHeight: { xs: 48, md: 56 } }} />
-      <Box sx={{ height: 8 }} />
-      
-      <Box sx={{ overflow: 'auto' }}>
-        <Typography 
-          variant="h6" 
-          sx={{ 
-            p: 2,
-            pb: 3,
-            color: 'white',
-            letterSpacing: '.05rem',
-            fontWeight: 500,
-            textAlign: 'center'
+      <Box sx={{ p: 3 }}>
+        <Typography
+          variant="h6"
+          sx={{
+            fontWeight: 700,
+            color: 'text.secondary',
+            mb: 2,
           }}
         >
-          Lessons
+          Concepts
         </Typography>
-        <Divider sx={{ borderColor: 'rgba(255, 255, 255, 0.12)' }} />
-        <List sx={{ py: 3 }}>
-          {chapters.chapters.map((chapter) => (
-            <ListItem key={chapter.id} disablePadding>
-              <ListItemButton 
-                onClick={() => {
-                  navigate(`/chapter/${chapter.id}`);
-                  if (variant === 'temporary') {
-                    toggleSidebar();
-                  }
-                }}
-                selected={Number(chapterId) === chapter.id}
-                sx={{
-                  py: 1.5,
-                  px: 2,
-                  transition: 'all 0.2s ease-in-out',
-                  '&.Mui-selected': {
-                    backgroundColor: 'rgba(255, 255, 255, 0.08)',
-                    '& .MuiListItemIcon-root': { color: '#42a5f5' },
-                    '& .MuiListItemText-primary': { color: '#42a5f5' },
-                    '&:hover': {
-                      backgroundColor: 'rgba(255, 255, 255, 0.12)',
-                    },
-                  },
-                  '&:hover': {
-                    backgroundColor: 'rgba(255, 255, 255, 0.08)',
-                    '& .MuiListItemIcon-root': { color: '#42a5f5' },
-                    '& .MuiListItemText-primary': { color: '#42a5f5' },
-                  },
-                }}
-              >
-                <ListItemIcon sx={{ 
-                  color: 'white', 
-                  minWidth: 40,
-                  transition: 'color 0.2s ease-in-out',
-                }}>
-                  <MenuBookIcon />
-                </ListItemIcon>
-                <ListItemText 
-                  primary={`Lesson ${chapter.id}`}
-                  primaryTypographyProps={{
-                    fontSize: '0.875rem',
-                    fontWeight: 500,
-                    color: 'white',
-                    mb: 0.5,
-                  }}
-                  secondaryTypographyProps={{
-                    fontSize: '0.75rem',
-                    color: 'rgba(255, 255, 255, 0.7)',
-                    lineHeight: 1.3,
-                  }}
-                />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
+        <Divider sx={{ mb: 2 }} />
       </Box>
+
+      <List disablePadding>
+        {chapters.chapters.map((chapter) => {
+          const isSelected = Number(chapterId) === chapter.id;
+          return (
+            <ListItemButton
+              key={chapter.id}
+              onClick={() => handleChapterClick(chapter.id)}
+              selected={isSelected}
+              sx={{
+                py: 1.5,
+                px: 3,
+                mx: 1,
+                borderRadius: 1,
+                '&.Mui-selected': {
+                  bgcolor: 'rgba(255, 245, 225, 0.8)',
+                  '&:hover': {
+                    bgcolor: 'rgba(255, 232, 194, 0.9)',
+                  },
+                  '& .MuiListItemIcon-root': {
+                    color: 'primary.main',
+                  },
+                },
+                '&:hover': {
+                  bgcolor: 'action.hover',
+                },
+              }}
+            >
+              <ListItemIcon sx={{ minWidth: '40px' }}>
+                <MenuBookIcon color={isSelected ? 'primary' : 'inherit'} />
+              </ListItemIcon>
+              <ListItemText
+                primary={chapter.title}
+                primaryTypographyProps={{
+                  variant: 'body2',
+                  fontWeight: isSelected ? 600 : 500,
+                  color: isSelected ? 'text.primary' : 'text.secondary',
+                }}
+              />
+            </ListItemButton>
+          );
+        })}
+      </List>
     </Drawer>
   );
 };
