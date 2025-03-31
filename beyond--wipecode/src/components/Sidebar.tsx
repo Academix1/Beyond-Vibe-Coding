@@ -46,6 +46,7 @@ const Sidebar = ({ variant }: SidebarProps) => {
         BackdropProps: {
           sx: {
             backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            
           },
         },
       }}
@@ -61,6 +62,7 @@ const Sidebar = ({ variant }: SidebarProps) => {
           },
           boxSizing: 'border-box',
           backgroundColor: 'white',
+          borderRadius: '10px',
           borderRight: `1px solid ${theme.palette.divider}`,
           ...(variant === 'temporary'
             ? {
@@ -68,6 +70,7 @@ const Sidebar = ({ variant }: SidebarProps) => {
                 top: '64px',
                 height: 'calc(100vh - 64px)',
                 zIndex: theme.zIndex.drawer - 1,
+                ml:2,
               }
             : {
                 position: 'relative',
