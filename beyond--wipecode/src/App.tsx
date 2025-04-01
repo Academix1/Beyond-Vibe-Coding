@@ -39,7 +39,6 @@ function AppContent() {
             position: 'sticky',
             top: '84px',
             height: 'calc(100vh - 64px)',
-            mb: 5,
             ml: 2,
             overflowY: 'auto',
           }}>

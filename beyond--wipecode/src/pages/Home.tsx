@@ -9,7 +9,7 @@ const Home = () => {
       sx={{
         position: 'relative',
 
-        height: '90vh',
+        height: '80vh',
         width: '95vw',
         overflowX: '-moz-hidden-unscrollable',
         overflowY: 'hidden',

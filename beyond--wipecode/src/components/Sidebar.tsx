@@ -74,7 +74,7 @@ const Sidebar = ({ variant }: SidebarProps) => {
               }
             : {
                 position: 'relative',
-                height: 'calc(100vh - 64px)',
+                height: 'calc(93vh - 64px)',
                 borderRight: 'none',
               }),
           overflowX: 'hidden',

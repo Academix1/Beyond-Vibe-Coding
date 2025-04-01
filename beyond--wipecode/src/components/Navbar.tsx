@@ -12,7 +12,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import CodeIcon from '@mui/icons-material/Code';
 import { useSidebar } from '../context/SidebarContext';
 
-const pages = ['Products', 'SelfLearning', 'LiveBootCamps'];
+const pages = ['Products', 'Self-Learning', 'Live Boot Camps'];
 
 const Navbar = () => {
   const { toggleSidebar } = useSidebar();
